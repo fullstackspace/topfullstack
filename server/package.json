@@ -24,9 +24,16 @@
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/swagger": "^4.5.12",
+    "@typegoose/typegoose": "^7.2.0",
+    "@types/mongoose": "^5.7.30",
+    "mongoose": "^5.9.22",
+    "nestjs-mongoose-crud": "^2.0.0",
+    "nestjs-typegoose": "^7.1.28",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
