@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors() // 允许跨域
   const options = new DocumentBuilder()
     .setTitle('Top full stack example')
     .setDescription('The top full stacj API description')
