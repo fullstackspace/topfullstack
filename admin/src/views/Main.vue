@@ -22,6 +22,7 @@
         <h3>全栈之巅 - 后台管理界面</h3>
       </el-header>
       <el-main>
+        <!-- router-view中如2个页面都引用一个组件时,可能会无法识别,这时可以通过:key="$route.path"来识别区分,同时可以解决同一个组件多以引用导致数据一致的问题 -->
         <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
