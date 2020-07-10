@@ -46,7 +46,7 @@ export default class CoursesList extends Vue {
   }
 
   // 删除
-  async remove(row) {
+  async remove(row: any) {
     try {
       await this.$confirm('是否确认删除？')
     } catch (e) {
