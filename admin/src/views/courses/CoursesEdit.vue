@@ -9,11 +9,11 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component({})
 export default class CoursesEdit extends Vue {
-  @Prop(String) id!: string
+  @Prop({ type: String }) id!: string
   data = {}
   fields = {
     name: { label: '课程名称', type: 'input' },
-    cover: { label: '课程封面图', type: 'input' },
+    cover: { label: '课程封面图', type: 'input' }
   }
 
   // 计算属性的写法 -> 属于JS中的语法
