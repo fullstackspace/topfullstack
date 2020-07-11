@@ -1,15 +1,16 @@
 <template>
   <div>
-    {{data.data}}
+    {{ data.data }}
     <avue-crud
       v-if="option.column"
+      :page="page"
       :data="data.data"
       :option="option"
-      v-model="obj"
       @row-save="create"
       @row-del="remove"
       @row-update="update"
       :table-loading="loading"
+      @on-load="changePage"
     ></avue-crud>
   </div>
 </template>
@@ -19,10 +20,15 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component({})
 export default class CoursesList extends Vue {
   @Prop(String) resource!: string
-  data = {}
-  obj = {}
-  option = {}
-  loading = true
+  data: any = {}
+  option: any = {}
+  page: any = {
+    total: 1,
+  }
+  query: any = {
+    limit: 3,
+  }
+  loading: Boolean = true
 
   async fetchOptions() {
     const res = await this.$http.get(`${this.resource}/options`)
@@ -31,10 +37,20 @@ export default class CoursesList extends Vue {
   }
   // 获取列表
   async fetch() {
-    const res = await this.$http.get(`${this.resource}`)
+    const res: any = await this.$http.get(`${this.resource}`, {
+      params: {
+        query: this.query,
+      },
+    })
     this.data = res.data
+    this.page.total = res.data.total
     this.loading = false
-    console.log(this.data)
+  }
+
+  changePage({ currentPage, pageSize }: any) {
+    this.query.page = currentPage
+    this.query.limit = pageSize
+    this.fetch()
   }
 
   // row, done, loading
