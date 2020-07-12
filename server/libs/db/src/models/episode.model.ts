@@ -17,5 +17,5 @@ export class Episode {
   file: string
 
   @prop({ ref: 'Course' })
-  course: Ref<Course>
+  course: Ref<Course>[]
 }

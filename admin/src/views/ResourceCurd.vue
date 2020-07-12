@@ -1,16 +1,17 @@
 <template>
   <div>
-    {{ data.data }}
+    {{ option }}
     <avue-crud
       v-if="option.column"
       :page="page"
       :data="data.data"
       :option="option"
       @row-save="create"
-      @row-del="remove"
       @row-update="update"
-      :table-loading="loading"
+      @row-del="remove"
       @on-load="changePage"
+      @sort-change="changeSort"
+      @search-change="search"
     ></avue-crud>
   </div>
 </template>
@@ -18,39 +19,61 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component({})
-export default class CoursesList extends Vue {
+export default class ResourceList extends Vue {
   @Prop(String) resource!: string
   data: any = {}
   option: any = {}
   page: any = {
     total: 1,
   }
-  query: any = {
-    limit: 3,
-  }
-  loading: Boolean = true
+  query: any = {}
 
   async fetchOptions() {
-    const res = await this.$http.get(`${this.resource}/options`)
-    console.log(res)
+    const res = await this.$http.get(`${this.resource}/option`)
     this.option = res.data
   }
   // 获取列表
   async fetch() {
+    const { query } = this
     const res: any = await this.$http.get(`${this.resource}`, {
       params: {
-        query: this.query,
+        query,
       },
     })
     this.data = res.data
     this.page.total = res.data.total
-    this.loading = false
   }
 
+  // 分页
   changePage({ currentPage, pageSize }: any) {
     this.query.page = currentPage
     this.query.limit = pageSize
     this.fetch()
+  }
+
+  // 表格排序
+  changeSort({ prop, order }: any) {
+    if (!order) {
+      this.query.sort = null
+    } else {
+      this.query.sort = {
+        [prop]: order === 'descending' ? -1 : 1,
+      }
+    }
+    this.fetch()
+  }
+
+  // 搜索
+  search(where: any, done: any) {
+    const { option } = this
+    const { column } = option
+    for (let key in where) {
+      const isRegex = column.find(({ prop }: any) => prop === key)
+      isRegex && isRegex.regex && (where[key] = { $regex: where[key] })
+    }
+    this.query.where = where
+    this.fetch()
+    done()
   }
 
   // row, done, loading

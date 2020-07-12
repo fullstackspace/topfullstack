@@ -15,16 +15,25 @@ export class CoursesController {
   options() {
     return {
       index: true,
+      searchMenuSpan: 8,
       indexLabel: ' ',
       title: '课程列表',
       column: [
         {
           label: '课程名称',
-          prop: 'name'
+          prop: 'name',
+          sortable: true, // 可排序
+          search: true, // 可作为搜索字段
+          regex: true, // 该字段作为自定义字段,表示是否进行模糊匹配
+          row: true // 独占一行
         },
         {
-          label: '课程封面图',
-          prop: 'cover'
+          prop: "cover",
+          label: "课程封面图",
+          // type: 'upload',
+          // width: 120,
+          // listType: 'picture-img',
+          // row: true, action: 'upload'
         }
       ]
     }
