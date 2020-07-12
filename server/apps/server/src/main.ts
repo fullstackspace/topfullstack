@@ -11,9 +11,10 @@ async function bootstrap() {
   //   prefix: '/uploads'
   // })
   const options = new DocumentBuilder()
-    .setTitle('Top full stack example')
-    .setDescription('The top full stacj API description')
+    .setTitle('Top full stack web Api example')
+    .setDescription('The top full stack API description')
     .setVersion('1.0')
+    .addBearerAuth()  // addBearerAuth启用token功能
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
