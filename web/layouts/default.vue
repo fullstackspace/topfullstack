@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.text" link>
+        <v-list-item v-for="item in items" :key="item.text" :to="item.link">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -67,7 +67,8 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="fill-height">
+      <nuxt-child />
+      <!-- <v-container class="fill-height">
         <v-row justify="center" align="center">
           <v-col class="shrink">
             <v-tooltip right>
@@ -80,7 +81,7 @@
             </v-tooltip>
           </v-col>
         </v-row>
-      </v-container>
+      </v-container> -->
     </v-main>
   </v-app>
 </template>
@@ -93,11 +94,16 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'mdi-trending-up', text: 'Most Popular' },
-      { icon: 'mdi-youtube-subscription', text: 'Subscriptions' },
-      { icon: 'mdi-history', text: 'History' },
-      { icon: 'mdi-playlist-play', text: 'Playlists' },
-      { icon: 'mdi-clock', text: 'Watch Later' },
+      { icon: 'mdi-home', text: 'Home', link: '/' },
+      { icon: 'mdi-trending-up', text: 'Hot Coursers', link: 'courses' },
+      {
+        icon: 'mdi-youtube-subscription',
+        text: 'Hot Comment',
+        link: 'comments',
+      },
+      // { icon: 'mdi-history', text: 'History' },
+      // { icon: 'mdi-playlist-play', text: 'Playlists' },
+      // { icon: 'mdi-clock', text: 'Watch Later' },
     ],
     items2: [
       { picture: 28, text: 'Joseph' },

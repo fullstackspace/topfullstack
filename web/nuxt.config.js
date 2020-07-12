@@ -1,5 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
-
+import dotenv from 'dotenv'
+// @nuxtjs/dotenv底层就是通过dotenv来读取.env相关的环境变量文件
+// dotenv.config() => 配置后nuxt.config才能访问到process.env
+dotenv.config()
 export default {
   /*
    ** Nuxt rendering mode
@@ -57,6 +60,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
     // '@nuxtjs/pwa',
   ],
   /*
