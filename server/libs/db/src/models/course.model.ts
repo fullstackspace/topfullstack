@@ -4,7 +4,8 @@ import { Episode } from './episode.model';
 
 @modelOptions({
   schemaOptions: {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true } // 用来显示虚拟字段
   }
 })
 export class Course {
@@ -16,8 +17,11 @@ export class Course {
   @prop()
   cover: string
 
+  // 该字段为虚拟字段,不会保存到数据库中
   @arrayProp({
-    ref: 'Episode',
+    ref: 'Episode',  // 参考的对象
+    localField: '_id', // 本地键,当前文件用哪个字段进行关联
+    foreignField: 'course' // 外键使用哪个字段关联
   })
   episodes: Ref<Episode>[]
 }

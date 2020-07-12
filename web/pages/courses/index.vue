@@ -3,7 +3,7 @@
     <h3>hot courses</h3>
     <v-row>
       <v-col v-for="item in courses" :key="item._id" md="4">
-        <v-card class="mx-auto" max-width="344">
+        <v-card :to="`/courses/${item._id}`" class="mx-auto" max-width="344">
           <v-img
             src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
             height="200px"
@@ -36,7 +36,6 @@
 export default {
   async asyncData({ $axios }) {
     const { data: courses } = await $axios.$get('courses')
-    console.log(courses)
     return {
       courses,
     }
