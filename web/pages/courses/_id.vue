@@ -1,6 +1,7 @@
 <template>
   <div class="pa-3">
     <h3>{{ courses.name }}</h3>
+    {{ currentIndex }}
     <v-select
       v-model="currentIndex"
       :items="
@@ -10,7 +11,7 @@
         }))
       "
     ></v-select>
-    <video width="100%" :src="videoList[0]" controls></video>
+    <video width="100%" :src="videoList[currentIndex]" controls></video>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
   data() {
     return {
       currentIndex: 0,
-      videoList: ['http://vjs.zencdn.net/v/oceans.mp4'],
+      videoList: ['http://vjs.zencdn.net/v/oceans.mp4', ''],
     }
   },
   computed: {
