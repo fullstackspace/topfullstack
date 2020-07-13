@@ -23,5 +23,5 @@ export class Course {
     localField: '_id', // 本地键,当前文件用哪个字段进行关联
     foreignField: 'course' // 外键使用哪个字段关联
   })
-  episodes: Ref<Episode>[]
+  episodes: Ref<Episode>[] // 表示当前字段是参考`Episode`列表
 }
