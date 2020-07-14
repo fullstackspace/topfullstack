@@ -55,25 +55,30 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-left color="red" dense>
+    <v-app-bar app clipped-left dense flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-icon class="mx-4" large>
-        mdi-youtube
+      <v-icon class="mx-4 red--text">
+        <!-- mdi-youtube -->
+        mdi-fingerprint
       </v-icon>
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Youtube</span>
+        <span class="subtitle-1 font-weight-bold">topfullstack</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-row align="center" style="max-width: 650px;">
+      <v-row align="center" style="max-width: 30vw;">
         <v-text-field
-          :append-icon-cb="() => {}"
           placeholder="Search..."
           single-line
+          filled
+          rounded
+          dense
           append-icon="mdi-magnify"
           color="white"
           hide-details
         ></v-text-field>
       </v-row>
+      <v-spacer></v-spacer>
+      <v-switch v-model="$vuetify.theme.dark" hide-details></v-switch>
     </v-app-bar>
 
     <v-main>
@@ -144,7 +149,7 @@ export default {
     ],
   }),
   created() {
-    this.$vuetify.theme.dark = true
+    this.$vuetify.theme.dark = false
   },
   methods: {
     async login() {
