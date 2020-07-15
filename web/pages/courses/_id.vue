@@ -1,7 +1,7 @@
 <template>
   <div class="pa-3">
+    <LinkBtn type="Course" :object="courses._id"></LinkBtn>
     <h3>{{ courses.name }}</h3>
-    {{ currentIndex }}
     <v-select
       v-model="currentIndex"
       :items="
@@ -16,7 +16,11 @@
 </template>
 
 <script>
+import LinkBtn from '../../components/LinkBtn'
 export default {
+  components: {
+    LinkBtn,
+  },
   async asyncData({ params, $axios }) {
     const { id } = params
     const courses = await $axios.$get(`courses/${id}`, {
@@ -26,7 +30,6 @@ export default {
         },
       },
     })
-
     return {
       id,
       courses,

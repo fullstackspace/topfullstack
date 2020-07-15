@@ -22,10 +22,12 @@ export class Action {
   })
   type: string;
 
-  @prop({
-    refPath: 'type', // refPath基于当前模型的某个字段来进行参考 -> 类似mongoose中的populate关联
-  })
-  object: Ref<Course | Episode>; // 参考的类型是Course或Episode ->后续有其他类型可以继续添加
+  // @prop({
+  //   refPath: 'type', // refPath基于当前模型的某个字段来进行参考 -> 类似mongoose中的populate关联
+  // })
+  // object: Ref<Course | Episode>; // 参考的类型是Course或Episode ->后续有其他类型可以继续添加
+  @prop({ refPath: 'type' })
+  object: Ref<Course | Episode>;
 
   @prop({
     enum: ['like', 'upVote'],

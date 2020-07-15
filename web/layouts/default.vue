@@ -130,11 +130,11 @@ export default {
     loginModel: {},
     items: [
       { icon: 'mdi-home', text: 'Home', link: '/' },
-      { icon: 'mdi-trending-up', text: 'Hot Coursers', link: 'courses' },
+      { icon: 'mdi-trending-up', text: 'Hot Coursers', link: '/courses' },
       {
         icon: 'mdi-youtube-subscription',
         text: 'Hot Comment',
-        link: 'comments',
+        link: '/comments',
       },
       // { icon: 'mdi-history', text: 'History' },
       // { icon: 'mdi-playlist-play', text: 'Playlists' },
