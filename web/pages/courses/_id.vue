@@ -1,25 +1,34 @@
 <template>
   <div class="pa-3">
-    <LinkBtn type="Course" :object="courses._id"></LinkBtn>
-    <h3>{{ courses.name }}</h3>
-    <v-select
-      v-model="currentIndex"
-      :items="
-        courses.episodes.map(({ name }, i) => ({
-          text: name,
-          value: i,
-        }))
-      "
-    ></v-select>
-    <video width="100%" :src="videoList[currentIndex]" controls></video>
+    <v-row>
+      <v-col :md="8">
+        <video width="100%" :src="videoList[currentIndex]" controls></video>
+        <link-btn type="Course" :object="courses._id"></link-btn>
+        <h3>{{ courses.name }}</h3>
+        <v-select
+          v-model="currentIndex"
+          :items="
+            courses.episodes.map(({ name }, i) => ({
+              text: name,
+              value: i,
+            }))
+          "
+        ></v-select>
+      </v-col>
+      <v-col :d="4">
+        <comment-list type="Episode" :object="episode._id"></comment-list>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import LinkBtn from '../../components/LinkBtn'
+import CommentList from '../../components/CommentList'
 export default {
   components: {
     LinkBtn,
+    CommentList,
   },
   async asyncData({ params, $axios }) {
     const { id } = params
