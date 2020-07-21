@@ -4,8 +4,10 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('actions')
+@ApiTags('操作')
 export class ActionsController {
   constructor(@InjectModel(Action) private actionModel: ReturnModelType<typeof Action>) { }
 

@@ -4,8 +4,10 @@ import { Comment } from '@libs/db/models/comment.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('comments')
+@ApiTags('评论')
 export class CommentsController {
   constructor(@InjectModel(Comment) private commentModel: ReturnModelType<typeof Comment>) { }
 
