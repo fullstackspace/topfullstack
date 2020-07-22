@@ -9,8 +9,7 @@
         v-model="content"
       ></v-text-field>
     </v-form>
-    {{ comments }}
-    <!-- <v-list two-line>
+    <v-list two-line>
       <v-list-item v-for="(item, i) in comments" :key="i">
         <v-list-item-avatar color="blue">
           <span class="white--text">{{
@@ -25,13 +24,22 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-    </v-list> -->
+    </v-list>
   </v-card>
 </template>
 
 <script>
 export default {
-  props: {},
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+    object: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       content: null,
@@ -50,17 +58,33 @@ export default {
       await this.fetch()
     },
     async fetch() {
-      this.comments = await this.$axios.$get('comments', {})
+      const { type, object } = this
+      this.comments = await this.$axios.$get('comments', {
+        // 方法一:不利于扩展
+        // params: {
+        //   type,
+        //   object,
+        // },
+        // 方法二:
+        params: {
+          query: {
+            where: {
+              type,
+              object,
+            },
+          },
+        },
+      })
     },
-    created() {
-      this.fetch()
+  },
+  // 课时切换时,重新获取数据
+  watch: {
+    object: {
+      handler() {
+        this.fetch()
+      },
+      immediate: true, // 立即执行,
     },
-    // watch: {
-    //   object: {
-    //     handler: 'fetch',
-    //     immediate: true,
-    //   },
-    // },
   },
 }
 </script>
